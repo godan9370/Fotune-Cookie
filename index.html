@@ -326,6 +326,37 @@
       font-style: italic;
     }
 
+    .reading-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    .reading-draw-again {
+      font-family: 'Jacquard 12', system-ui;
+      font-size: 22px;
+      line-height: 1;
+      background: none;
+      border: 1px solid var(--fg);
+      color: var(--fg);
+      padding: 12px 28px 10px;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+      transition: background 0.18s ease, color 0.18s ease;
+      outline: none;
+    }
+
+    .reading-draw-again:hover {
+      background: var(--fg);
+      color: var(--bg);
+    }
+
+    .reading-draw-again:active {
+      transform: scale(0.98);
+    }
+
     .reading-close {
       font-family: 'Space Mono', monospace;
       font-size: 8px;
@@ -337,8 +368,7 @@
       cursor: pointer;
       opacity: 0.2;
       transition: opacity 0.2s;
-      padding: 8px 0;
-      margin-top: 8px;
+      padding: 4px 0;
       outline: none;
     }
 
@@ -448,7 +478,10 @@
       <p class="reading-name" id="reading-name"></p>
       <div class="reading-divider"></div>
       <p class="reading-horoscope" id="reading-horoscope"></p>
-      <button class="reading-close" onclick="closeReading()">close reading</button>
+      <div class="reading-actions">
+        <button class="reading-draw-again" onclick="drawAgain()">draw another fortune</button>
+        <button class="reading-close" onclick="closeReading()">close reading</button>
+      </div>
     </div>
   </div>
 
@@ -477,11 +510,15 @@
         img: "Chedz.avif",
         readings: [
           // good
-          "Haynes will swing by your desk with good news — something has been approved that you had quietly given up on. Neil's yellow trace will still be advancing, but today it won't feel threatening. You will leave a mark on everything you touch. It will be the good kind. The dust, for once, will settle in your favour. You will also win footy tips this week.",
+          "Haynes will swing by your desk with good news — something has been approved that you had quietly given up on. Neil's yellow trace will still be advancing, but today it won't feel threatening. You will leave a mark on everything you touch. It will be the good kind. The dust, for once, will settle in your favour. You will also win the footy tips this week.",
           // bad
-          "Howard will announce mid-morning that the office layout is changing. He will not be taking questions. Mark will send a string of Teams reactions from Sydney that collectively communicate a sigh. You will be pulled into a new competition before lunch. The brief will be one sentence. Nobody will respond to your follow-up. The whole thing will leave an artificial, cheesy aftertaste. Steven Baleva will spend the day by himself in the Gold Coast office.",
+          "Howard will announce mid-morning that the office layout is changing. He will not be taking questions. Mark will send a string of Teams reactions from the Sydney office — where they are down to their last water bottle — that collectively communicate a sigh. You will be pulled into a new competition before lunch. The brief will be one sentence. Nobody will respond to your follow-up. The whole thing will leave an artificial, cheesy aftertaste. Steven Baleva will spend the day by himself in the Gold Coast office.",
           // strange
-          "Jesse will reply to your work with 'THX'. Not 'thanks'. 'THX'. You will think about what that means for most of the morning. Lills will message you at 11pm revising something you both agreed was finished. Neil's yellow trace will have reached your monitor by the time you read it. These things will feel connected. They will not be."
+          "Jesse will reply to your work with 'THX'. Not 'thanks'. 'THX'. You will think about what that means for most of the morning. Lills will message you at 11pm revising something you both agreed was finished. Neil's yellow trace will have reached your monitor by the time you read it. These things will feel connected. They will not be.",
+          // tender win
+          "ARM will win a submission this week. The project is a minor works fit-out of a school janitor's closet. The design was completed previously by Architectus. You will be listed as a contributor. The win email will have three exclamation marks in it. You will try to feel the full weight of the achievement. The dust will settle. You will manage.",
+          // Tom Jones / no coffee
+          "Tom Jones will walk past your desk and send your cup off the edge without breaking stride or looking back. There will be no coffee beans to replace it anyway. The milk frother will then splutter and distribute foam across the front of your shirt before you can step away. You will wear that shirt for the rest of the day. The stain will look, generously, like nothing in particular."
         ]
       },
       {
@@ -493,7 +530,11 @@
           // bad
           "You will send Howard a detailed, well-structured email this week. He will read it. He will then announce a change to the project — and possibly the building — without referencing your email at all. Philippe will message you from Adelaide asking for something related. You will not hear from him again. Renae will have handled it before you work out what he actually needed. Some things are simply hard to digest, no matter how carefully you package them.",
           // strange
-          "Lills will send feedback at 1:47am on something you both agreed was done a fortnight ago. The feedback will not be actionable. Nothing will ever be quite final. Lucy will also appear today to pull you into an audit prep session that will consume your entire afternoon. The chocolate will be there. You just won't reach it today."
+          "Lills will send feedback at 1:47am on something you both agreed was done a fortnight ago. The feedback will not be actionable. Nothing will ever be quite final. Lucy will also appear today to pull you into an audit prep session that will consume your entire afternoon. The chocolate will be there. You just won't reach it today.",
+          // Mark good mood
+          "Mark will respond to your email. Same day. Within the hour. The reply will be warm, useful, and answer the question you actually asked. You will read it twice to check for a catch. There will not be a catch. The Sydney office will still be on its last water bottle, but Mark's good mood will be real. Let the chocolate land. It does not need explaining.",
+          // blind war
+          "You will put the window blind down because the glare will be directly hitting your screen. Jesse will walk past and put it back up. You will put it back down. Jesse will walk past again. This will continue for most of the morning. Nobody will address it directly. The blind will be up when you go home. The plain base of your day will have held, but the chocolate will have been just out of reach."
         ]
       },
       {
@@ -503,9 +544,13 @@
           // good
           "Haynes will tell you something this week that will make the long wait feel worthwhile. A golden moment will arrive — warm, unhurried, and slightly overdue. You will also win the footy tips. Accept everything without picking it apart. Caramel will not stay warm forever, and this one will have your name on it.",
           // bad
-          "Howard will change the scope of something mid-flow without consulting anyone. Mark will be visibly annoyed by this but will direct that energy at you instead, pouting through the afternoon standup. You will also somehow damage a large-format print job on the plotter and Peter from IT will come over about it. He will not be pleased. Things will get sticky. Progress will move slowly, then sideways. Like caramel nobody asked to be there.",
+          "Howard will change the scope of something mid-flow without consulting anyone. Mark will be visibly annoyed by this and will direct that energy at you instead, pouting through the standup. You will also somehow damage a large-format print job on the plotter and Peter from IT will come over about it. He will not be pleased. Things will get sticky. Progress will move slowly, then sideways. Like caramel that nobody asked to be there.",
           // strange
-          "Lills will message you at 2:34am with a single revision to something that was signed off. It will feel conclusive when you read it at 8am. By noon it will have changed again. Nothing with Lills will ever be quite set. Like caramel — always one degree from becoming something else entirely."
+          "Lills will message you at 2:34am with a single revision to something that was signed off. It will feel conclusive when you read it at 8am. By noon it will have changed again. Nothing with Lills will ever be quite set. Like caramel — always one degree from becoming something else entirely.",
+          // headshot
+          "You will be included in a submission this week. Your headshot will be a selfie taken at a house party more than a decade ago. It will have been AI-processed onto a plain corporate background. The AI will have made adjustments to your face — your jawline, mostly. You will be notably better looking in the submission than in real life. You will not quite recognise yourself. Nobody will mention it. The caramel will be golden. So, apparently, will you.",
+          // urgent task, no follow up
+          "Something will be delegated to you this week that is framed as extremely urgent. You will rearrange your day around it. You will deliver it. You will hear nothing back. Nobody will follow up. Nobody will ever raise it again. The caramel will have cooled. The moment will have passed. That is all."
         ]
       },
       {
@@ -515,9 +560,13 @@
           // good
           "Haynes will back your position in a meeting where you expected to stand alone. Your plain, direct read of the situation will be the one that moves the room. Neil will write something down. You will leave feeling, for once, like the finger was pointing in the right direction.",
           // bad
-          "Mark will delegate something to you from Sydney with no brief, no deadline, and visible reluctance. The message will feel pouty. There will be no attachment. You will follow up. Mark will not reply. Philippe will also reach out from Adelaide asking for something that sounds related. You will not hear from him again. Renae will have sorted it. It will be a dry, finger-wagging kind of week.",
+          "Mark will delegate something to you from Sydney — where they are on their last water bottle — with no brief, no deadline, and visible reluctance. The message will feel pouty. There will be no attachment. Philippe will also reach out from Adelaide asking for something that sounds related. You will not hear from either of them again. Renae will have sorted it. It will be a dry, finger-wagging kind of week.",
           // strange
-          "You will be pulled into a new competition today. The parameters will be unclear. Howard will mention it in passing and then pivot immediately into describing a change he wants to make to the physical layout of the office. These two things will seem connected. They may be. Nobody will explain. You will also have to refill the coffee beans, and at some point you will do something to the plotter printer that requires Peter from IT to come over. He will be very calm about it in a way that is somehow worse."
+          "You will be pulled into a new competition today. The parameters will be unclear. Howard will mention it in passing and then pivot immediately into describing a change he wants to make to the physical layout of the office. These two things will seem connected. They may be. Nobody will explain. You will also have to refill the coffee beans, and at some point you will do something to the plotter that requires Peter from IT to come over. He will be very calm about it in a way that is somehow worse.",
+          // fridge cleared
+          "You will arrive at the work fridge this week to find it has been cleared. Your pickles will be gone. Your tupperware will be gone. There will be a note about fridge policy where your shelf used to be. Nobody will know who authorised the clear-out or when it happened. This is simply what happens to plain things left unattended.",
+          // Tanya / Natasha call
+          "Someone will call the office this week asking for Tanya Hillman. You will have to navigate the conversation carefully — unable to confirm or deny whether she works here, because honestly you do not know. She is on the register. She has not been in for two years. They will then ask for Natasha Giles. You will do the same dance again. The call will end without resolution. You will return to your desk. No one will ever explain Tanya Hillman."
         ]
       },
       {
@@ -527,9 +576,13 @@
           // good
           "Haynes will mention your name somewhere it counts. Howard will walk past, look at your screen, and say something vaguely affirming in the way that old men do. The dark layer underneath — the capability you don't lead with — will be exactly what this week requires. The coating will hold.",
           // bad
-          "Jesse will send feedback this week. It will be one character. You will not be able to determine tone, intent, or required action from it. You will sit with it for the rest of the afternoon. Mark will also be in a sulk nearby and will make it subtly known through posture alone. The coating will be tested.",
+          "Jesse will send feedback this week. It will be one character. You will not be able to determine tone, intent, or required action from it. You will sit with it for the rest of the afternoon. Mark will also be in a sulk and will make it known through posture alone, dialling in from Sydney with an expression readable even on a small laptop screen. The coating will be tested.",
           // strange
-          "Neil's yellow trace will push past the line this week. You will say nothing. Lills will send a message at an hour that raises questions — revising the thing you both agreed was done. Under your calm exterior, something will shift — dark, quiet, coating everything. It will cost you something small but specific."
+          "Neil's yellow trace will push past the line this week. You will say nothing. Lills will send a message at an hour that raises questions — revising the thing you both agreed was done. Under your calm exterior, something will shift — dark, quiet, coating everything. It will cost you something small but specific.",
+          // Jason and Philippe project
+          "You will be put on a project this week with Jason and Philippe. Philippe is in Adelaide. Jason is apparently based in another office — nobody can say which one with certainty. You will message both. You will hear from neither. By the end of the week it will be apparent that you are doing this alone. The dark coating will protect you. The project will not.",
+          // ARM wins janitor closet
+          "ARM will win a submission this week. Minor works. A school janitor's closet. Architectus had already done the design. Howard will brief you on it with quiet satisfaction. You will look for the win inside the win. It will be small. It will be there. The dark coating stays on regardless."
         ]
       },
       {
@@ -541,7 +594,11 @@
           // bad
           "Lucy will pull you into an audit prep session that derails the entire afternoon. Howard will also announce a structural change — to the project, the process, possibly the ceiling — without prior notice. Things will crumble slightly before they improve. The shortcake rarely holds under this kind of pressure.",
           // strange
-          "Jesse will respond this week with warmth and specificity that feels entirely out of character. You will check that it was meant for you. It was. Mark will be visibly grumpy nearby, which will make the contrast feel even more surreal. The jam will be real. The shortcake will, briefly, hold. You will not fully trust it."
+          "Jesse will respond this week with warmth and specificity that feels entirely out of character. You will check that it was meant for you. It was. Mark will be visibly grumpy nearby, which will make the contrast feel even more surreal. The jam will be real. The shortcake will, briefly, hold. You will not fully trust it.",
+          // Tom Jones
+          "Tom Jones will walk past your desk this week and make contact with something — your cup, your mouse, a document you had arranged carefully. He will not break stride. He will not look back. You will deal with the aftermath. The jam will still be there. The shortcake will have taken a hit. The two facts will coexist.",
+          // Mark good mood
+          "Mark will respond to your message the same day you send it. From Sydney — where they are on their last water bottle — he will be in an inexplicably good mood. The response will be helpful. You will feel briefly and genuinely good about this. Let it be the jam. Let the jam be the point. The shortcake will hold today."
         ]
       },
       {
@@ -553,7 +610,11 @@
           // bad
           "A task you closed will be reopened. Howard will have changed the brief — and possibly rearranged the physical space in which the work is meant to be done — without consulting anyone. You will be in the middle of refilling the coffee beans when you find out. You will not have a good answer ready. The wheel will keep turning whether you are on it or not. Steven Baleva will spend the day by himself in the Gold Coast office.",
           // strange
-          "Mark will describe your approach in a meeting as something ambiguously negative, in a tone so pouty and indistinct that you won't be certain it was negative. Everyone will move on. You will spend the rest of the day quietly turning it over. The wheel will turn. You will not be able to tell which direction. That will be, in fact, the wheel."
+          "Mark will describe your approach in a meeting as something ambiguously negative, in a tone so pouty and indistinct that you won't be certain it was negative. Everyone will move on. You will spend the rest of the day quietly turning it over. The wheel will turn. You will not be able to tell which direction. That will be, in fact, the wheel.",
+          // urgent task nobody chases
+          "Something will come in this week framed as high priority. You will drop everything. You will complete it promptly and send it through. You will hear nothing back. Nobody will follow up. Nobody will ever mention it again. The wheel will turn. Sometimes it turns for nobody in particular.",
+          // headshot AI
+          "You will be included in a submission this week. Your profile photo will be a decade-old selfie from a house party, AI-processed onto a clean white background. The AI will have done something to your face. You will be considerably better looking in the document than you are in real life. Haynes will tell you it looks great and will mean it. The wheel will keep turning. Apparently so will your jawline."
         ]
       },
       {
@@ -563,9 +624,13 @@
           // good
           "Haynes will compare you favourably to the original without making a big thing of it. Howard will speak to you first after the review. You will not be the reference implementation — you will be what they actually wanted. The off-brand will have quietly become the standard.",
           // bad
-          "You will be forwarded a very long thread by someone who thinks it is more your lane. You will already be in the thread. Your email will be the one currently under discussion. Mark will have reacted to it in a way that communicates grumpiness without using words. The imitation, it will turn out, can also be held responsible.",
+          "You will be forwarded a very long thread by someone who thinks it is more your lane. You will already be in the thread. Your email will be the one currently under discussion. Mark will have reacted to it in a way that communicates grumpiness without words, calling in from a Sydney office with no running water. The imitation, it will turn out, can also be held responsible.",
           // strange
-          "Neil will introduce you to someone from another team and lose your title mid-sentence. He will improvise. What he says will not be your job. You will have a meeting about it next Tuesday. Lucy will appear the same day to pull you into something audit-related. Philippe will message you from Adelaide asking if you can help with something for the meeting. You will not hear from him again. Renae will have already done it. A pay freeze will be announced by end of week. The off-brand option was never going to pay well."
+          "Neil will introduce you to someone from another team and lose your title mid-sentence. He will improvise. What he says will not be your job. You will have a meeting about it next Tuesday. Lucy will appear the same day to pull you into something audit-related. Philippe will message you from Adelaide asking if you can help with something for the meeting. You will not hear from him again. Renae will have already done it. A pay freeze will be announced by end of week. The off-brand option was never going to pay well.",
+          // blind war
+          "You and Jesse will spend the morning in a silent, unacknowledged war over the window blind. Down, then up, then down. Neither of you will speak about it. The off-brand version of yourself — the one who tolerates this quietly — will be fully operational today. The standard was never going to hold.",
+          // Tanya / Natasha
+          "Someone will call for Tanya Hillman this week. You will be the one who picks up. Neither of you will know if she works here. She is on the register. She has not been in for over two years. They will ask for Natasha Giles. You will do it again. The call will end without resolution. You will hang up as the imitation of someone who has answers. You will have done your best."
         ]
       },
       {
@@ -577,7 +642,11 @@
           // bad
           "Howard will pull a chair up to your desk and ask if you are winning yet. He will have opinions about the design — of the work, the process, and possibly the room itself. You will have thought the thing was done. It will not be done. Lills will send a contradicting revision at midnight to confirm this. Steven Baleva will spend the day by himself in the Gold Coast office.",
           // strange
-          "Jesse will forward your work externally with no context. That person will reply directly to you: 'so I hear you're the one who puts it all together'. You will not be certain that you are. Neil's yellow trace will be touching your trackpad by this point. You will still have to refill the coffee beans. The coconut will continue to divide opinion."
+          "Jesse will forward your work externally with no context. That person will reply directly to you: 'so I hear you're the one who puts it all together'. You will not be certain that you are. Neil's yellow trace will be touching your trackpad by this point. You will still have to refill the coffee beans. The coconut will continue to divide opinion.",
+          // fridge cleared
+          "You will arrive at the work fridge to find it has been cleared. Your pickles will be gone. Your tupperware will be gone. The fridge will be spotless. There will be no note, no warning, no explanation. The coconut of your daily routine will have been removed without consultation. The pink will be all that remains.",
+          // ARM tender
+          "ARM will win a submission this week. Minor works. A school janitor's closet at a private school. Architectus did the original design. Howard will announce it as though it is meaningful. Haynes will follow up with something privately positive. The coconut, the jam, the icing — assembled from unlikely parts into something that counts. Take it."
         ]
       },
       {
@@ -589,7 +658,11 @@
           // bad
           "Your feedback on a document will be marked resolved without being addressed. You will follow up. Jesse will reply 'THX'. Philippe will also message you from Adelaide asking a question you already answered last week. You will not hear from him again. Renae will have taken care of it. A pay freeze will be announced later in the week, timed with devastating crispness to land just before your rent is due. The lemon will not care about your calendar.",
           // strange
-          "Howard will email you directly — which has not happened before. The subject line will be blank. The body will be two sentences that don't connect. You will reply. He will not open it for three days, at which point he will announce a change that makes the original email irrelevant. Lills will have already revised it twice by then. The cream will have curdled. You will still be expected to serve it."
+          "Howard will email you directly — which has not happened before. The subject line will be blank. The body will be two sentences that don't connect. You will reply. He will not open it for three days, at which point he will announce a change that makes the original email irrelevant. Lills will have already revised it twice by then. The cream will have curdled. You will still be expected to serve it.",
+          // no coffee / frother
+          "There will be no coffee beans this week. You will discover this at the worst possible moment. The milk frother will also be malfunctioning and will distribute foam across the front of your shirt before you can step back. You will return to your desk wearing the evidence. The sourness of the morning will be real. The crispness of your shirt will not be.",
+          // Jason and Philippe project
+          "You will be assigned to a project with Jason and Philippe this week. Philippe is in Adelaide and will ask one question before going quiet. Jason is apparently based somewhere nobody can verify — his messages will sit unread for days. By Friday it will be clear that you are on this alone. The crisp reality of the situation will be obvious to you if not to anyone who assigned it."
         ]
       },
       {
@@ -599,15 +672,21 @@
           // good
           "Haynes will quietly handle something on your behalf this week without making it a thing. You will notice after the fact. A meeting you had been dreading will be cancelled. Neil will have made that call. The cream will rise without noise. Accept it without asking how.",
           // bad
-          "You will end up across four threads with Mark about the same topic, each with a slightly different subject line. Mark will be in a quietly grumpy mood in all four, calling in from Sydney. None of the threads will reference the others. Philippe will be CC'd on two of them and will respond to neither. You will be the one to consolidate everything. Renae will have somehow already done a version of this. The layers will feel like a burden long before they become a strength.",
+          "You will end up across four threads with Mark about the same topic, each with a slightly different subject line. Mark will be in a quietly grumpy mood in all four, calling in from Sydney on their last water bottle. None of the threads will reference the others. Philippe will be CC'd on two of them and respond to neither. You will be the one to consolidate everything. Renae will have somehow already done a version of this. The layers will feel like a burden long before they become a strength.",
           // strange
-          "Haynes will schedule a meeting, attend it, say nothing for nine full minutes, then say 'just wanted to check in' and end the call. A blank shared document will have been open the entire time. This will turn out to be good news delivered in the most indirect way imaginable. Your annual review will also be coming up. You will not know who it is with or when. Lills will send something at 11pm that means nothing is final. The cream will be stacked too high. This will always be the risk."
+          "Haynes will schedule a meeting, attend it, say nothing for nine full minutes, then say 'just wanted to check in' and end the call. A blank shared document will have been open the entire time. This will turn out to be good news delivered in the most indirect way imaginable. Your annual review will also be coming up. You will not know who it is with or when. Lills will send something at 11pm that means nothing is final. The cream will be stacked too high. This will always be the risk.",
+          // Tom Jones
+          "Tom Jones will walk past your desk this week. Something will be knocked. It will be the thing you least wanted knocked. He will keep walking. You will have assembled something carefully, in layers, over a long period of time, and the disruption will set at least one layer back. The cream was real. Tom Jones was also real. These facts will coexist.",
+          // annual review / mystery invite
+          "Your annual review will be scheduled this week. The calendar invite will have no organiser name. The meeting title will say 'Review — [Name]' and your name will not be where [Name] is. The time slot will conflict with something you are already in. Lills will send you a revision at 3am the night before. The layers are real. The review is real. Nothing will feel final."
         ]
       },
       {
         name: "Ginger Nut",
         img: "Ginger Nut.jpg",
         readings: [
+          "You are Ginger Nut.",
+          "You are Ginger Nut.",
           "You are Ginger Nut.",
           "You are Ginger Nut.",
           "You are Ginger Nut."
@@ -620,9 +699,13 @@
           // good
           "Haynes will send a message this week that cuts through everything. Something will be stacked in your favour — layer upon layer, exactly as designed. Howard will say something vague but affirming on his way past. Neil will already be aware. Go full Tim Tam Slam. The straw is optional. The commitment is not. Steven Baleva will spend the day by himself in the Gold Coast office.",
           // bad
-          "Lucy will pull you into audit prep. Mark will add scope to something, grumpily, without making eye contact from Sydney. Howard will change the design of the project — and possibly an adjacent structural element — without warning. Lills will send a revision at 11pm. You will be the Tim Tam at the bottom of the packet and someone will have already shaken the tin.",
+          "Lucy will pull you into audit prep. Mark will add scope to something, grumpily, without making eye contact from a Sydney office that is now completely out of running water. Howard will change the design of the project — and possibly an adjacent structural element — without warning. Lills will send a revision at 11pm. You will be the Tim Tam at the bottom of the packet and someone will have already shaken the tin.",
           // strange
-          "Jesse will schedule a meeting called 'touch base re: everything'. Fifteen minutes. Twelve attendees. Sent at 11:47pm. You will not know if you are presenting. Jesse will open with something genuinely kind. You will not know what to do with that. Your annual review will also be coming up at some point — you will not know when or with who. A new competition will have already started. The slam will be underway. You will not remember agreeing to any of it."
+          "Jesse will schedule a meeting called 'touch base re: everything'. Fifteen minutes. Twelve attendees. Sent at 11:47pm. You will not know if you are presenting. Jesse will open with something genuinely kind. You will not know what to do with that. Your annual review will also be coming up — you will not know when or with who. A new competition will have started. The slam will be underway. You will not remember agreeing to any of it.",
+          // Tanya / Natasha
+          "The phone will ring this week and someone will ask for Tanya Hillman. You will not be able to confirm or deny she works here. She is on the register. She has not been in for over two years. They will then ask for Natasha Giles. You will navigate that too, in the same careful non-answer. The call will end unresolved. You will return to your work. Go full Tim Tam Slam. This is simply part of the day.",
+          // blind war
+          "The blind war with Jesse will escalate this week. Down, then up, then down, then up. Neither of you will say a word about it. At some point one of you will be in a meeting and the matter will settle itself by default. The straw is optional. The ritual, however — the ritual is everything."
         ]
       }
     ];
@@ -788,6 +871,12 @@
       if (e && e.target !== document.getElementById('reading-modal') &&
           !e.target.classList.contains('reading-close')) return;
       document.getElementById('reading-modal').classList.remove('open');
+    }
+
+    function drawAgain() {
+      document.getElementById('reading-modal').classList.remove('open');
+      // Brief pause so the modal fades out before cards animate in
+      setTimeout(dealCards, 360);
     }
 
     // ─── RESET ──────────────────────────────────────────────────────────────────
